@@ -13,7 +13,7 @@ public class AccountService {
 
   private final AccountRepository accountRepository;
 
-  public Account saveAccount() {
-    return null;
+  public Account saveAccount(Account account) {
+    return accountRepository.save(account);
   }
 }

@@ -15,6 +15,10 @@ public class CustomUserDetails implements UserDetails {
   @Getter
   private Account account;
 
+  public CustomUserDetails(Account account) {
+    this.account = account;
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(this.account.getRole().toString()));
