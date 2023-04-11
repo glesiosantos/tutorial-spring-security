@@ -17,20 +17,20 @@ import br.com.glesioss.security.modules.security.services.AuthService;
 import lombok.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthResource {
 
   private final AuthService authService;
 
   @PostMapping("/signIn")
-  public ResponseEntity<AuthResponseDTO> signIn(@RequestBody AuthSignInDTO signInDTO) {
+  public ResponseEntity<AuthResponseDTO> signIn(@RequestBody AuthSignInDTO signInDTO) throws Exception {
     var response = authService.authenticated(signInDTO);
     return ResponseEntity.ok(response);
   }
 
   @PostMapping("/signUp")
-  public ResponseEntity<?> signUp(@RequestBody AuthRegisterRequestDTO authRegisterRequestDTO) {
+  public ResponseEntity<?> signUp(@RequestBody AuthRegisterRequestDTO authRegisterRequestDTO) throws Exception {
     var account = authService.register(authRegisterRequestDTO);
     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/api/auth/{id}")
         .buildAndExpand(account.getId()).toUri();
